@@ -17,13 +17,14 @@ public:
 	~stack();
 	stack(const stack &st);
 	stack& operator=(const stack &st);
+	bool operator==(const stack &st);
+	bool operator!=(const stack &st);
 	int size() { return Size; }
-	type get(int &n);
 	void pop();
 	bool empty();
 	bool full();		
 	void push(const type& n);  
-	type getlast();
+	type get();
 	  
 };
 #endif;

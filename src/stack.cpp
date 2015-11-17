@@ -9,7 +9,7 @@ stack<type>::stack(int size)
 		 for (int i=0;i<size;i++)
 				 ast[i]=0;
 		 Max=-1; 
-		 Size=n;
+		 Size=size;
      
 	}
 }
@@ -76,14 +76,7 @@ void stack<type>::push(const type& n)
 		ast[Max]=n;
 		}
 }
-template <class type>
-type stack<type>::get(int &n) 
-{  
-	if ((n<Max -1)&&(n>=0))
-		throw invalid argument("--");
-	else 
-		return ast[n];
-}
+
 template <class type>
 void stack<type>::pop()
 {   if (Max==-1) throw invalid_argument("--");
@@ -92,7 +85,7 @@ else
 }
 
 template <class type>
-type stack<type>::getlast()
+type stack<type>::get()
 {
   if (Max== -1)
 		throw invalid argument("--");
@@ -103,4 +96,24 @@ type stack<type>::getlast()
 	     Max--;
 	}
 
+}
+
+template <class type>
+bool stack<type>::operator==(const stack &st)
+{
+	if((Size!=st.Size)||(Max!=st.Max)) return false; 
+	else 
+	{
+       bool t=true;
+      for (int i=0;i<Size;i++)
+		  if(ast[i]!=st.ast[i])
+		  {t=false; break;}
+        return t;
+	}
+}
+
+template <class type>
+bool stack<type>::operator!=(const stack &st)
+{ 
+	return((*this)==st)?false:true;
 }
