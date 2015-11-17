@@ -4,13 +4,13 @@ void raz(string s,vector<string> &str)
  {
  vector<string>::iterator qq;
  string smin;  int k=-1;
- string::iterator e;
+ string::iterator e; int z=0;
  vector<string>::iterator w;
 
  for (e=s.begin();e<s.end();e++)
  {
       if (*e=='-')
-         { if (k<0)  {
+	  { if ((k<0)&&(z==0))  {
                  string t;
                  t.pb('0');
                  str.pb(t); 
@@ -27,8 +27,9 @@ void raz(string s,vector<string> &str)
                  smin.clear();}
                  } else {
       if ((*e=='(')||(*e==')')||(*e=='*')||(*e=='+')||(*e=='/'))
-         {if(k>0)
-      {   if (!smin.empty()) str.pb(smin); 
+         {   if(*e=='(') z=0; else z=1;
+			 if(k>0)
+	  {   if (!smin.empty()) str.pb(smin); 
                  k=-1;  
                  string t; 
                  t.pb(*e); 
@@ -39,7 +40,8 @@ void raz(string s,vector<string> &str)
                 t.pb(*e);
                 str.pb(t); }}
       else 
-      {  if ((*e-'0')>-1 && (*e-'0')<10)
+      {   z=1;
+		  if ((*e-'0')>-1 && (*e-'0')<10)
                       { if(k==1)
                           smin.pb(*e); else 
                           { k=1; 
@@ -47,7 +49,8 @@ void raz(string s,vector<string> &str)
                           smin.clear();
                           smin.pb(*e);}}
            else  
-                 { if(k==2)
+		   {   z=1;
+			   if(k==2)
                           smin.pb(*e); else 
       { k=2;
         if (!smin.empty())  str.pb(smin); 
