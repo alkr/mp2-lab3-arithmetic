@@ -1,7 +1,8 @@
 #include <arithmetic.h>
 
-void raz(string s)
- { 
+void raz(string s,vector<string> &str)
+ {
+ vector<string>::iterator qq;
  string smin;  int k=-1;
  string::iterator e;
  vector<string>::iterator w;
