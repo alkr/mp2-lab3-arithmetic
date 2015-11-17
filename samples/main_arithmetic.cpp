@@ -6,6 +6,7 @@ cin>>s;
 raz(s);
 for (qq=str.begin();qq<str.end();qq++)
      cout<<*qq<<endl;
-
+int i;
+cin>>i;
   return 0;
 }

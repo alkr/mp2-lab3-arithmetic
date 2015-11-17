@@ -11,6 +11,6 @@ using namespace std;
 vector <string> str;
 vector <string>::iterator qq;
 
- void raz(string s);
+void raz(string s);
 
 #endif

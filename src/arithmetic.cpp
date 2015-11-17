@@ -1,6 +1,6 @@
-#include "arithmetic.h"
+#include <arithmetic.h>
 
- void raz(string s)
+void raz(string s)
  { 
  string smin;  int k=-1;
  string::iterator e;
@@ -58,3 +58,4 @@
  if (!smin.empty())  str.pb(smin);
  smin.clear();
  }
+
