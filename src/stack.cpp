@@ -90,9 +90,8 @@ type stack<type>::get()
   if (Max== -1)
 		throw invalid argument("--");
 	else  
-	{ return ast[Max];
-        if (Max==-1) throw invalid_argument("--");
-          else 
+	{ 
+		return ast[Max];
 	     Max--;
 	}
 

@@ -41,7 +41,7 @@ void raz(string s,vector<string> &str)
                 str.pb(t); }}
       else 
       {   z=1;
-		  if ((*e-'0')>-1 && (*e-'0')<10)
+		  if (((*e-'0')>-1 && (*e-'0')<10)||(*e=='.'))
                       { if(k==1)
                           smin.pb(*e); else 
                           { k=1; 
@@ -63,3 +63,110 @@ void raz(string s,vector<string> &str)
  smin.clear();
  }
 
+void pol(vector<string> str, vector<string> &polz)
+{   
+	stack<char> st(MAX);
+	vector<string>::iterator qq;
+	for (qq=str.begin(); qq<str.end(); qq++)
+	{  
+		string ww=*qq;
+		if ((*(ww.begin())=='*')||(*(ww.begin())=='+')||(*(ww.begin())=='/')||(*(ww.begin())=='-')||(*(ww.begin())=='('))
+			st.push(*ww.begin());
+		else 
+		{
+			if (*(ww.begin())==')')
+			{   char h=st.get();
+			  while (h!='(')
+			  {  h=st.get();
+				  string hh;
+			   hh.pb(h);
+				  polz.pb(hh);
+			  }
+			  if(!st.empty())
+			  {  h=st.get();
+				  string hh;
+			   hh.pb(h);
+				  polz.pb(hh);
+			  }}
+			else 
+				polz.pb(ww);}}
+	 while (!st.empty())
+	{   
+		char cc=st.get();
+		string hhh;
+		hhh.pb(cc);
+		polz.pb(hhh);
+	} 
+}
+
+double dob(string tt)
+{  string::iterator qq;
+   int k=0;
+    double m=1.0;
+    double ans=(double)(*tt.begin()-'0');
+	for (qq=tt.begin()+1;qq<tt.end(); qq++)
+	{if (*qq=='.')
+	    k=1;
+	else  
+	{if (k==0)
+		{ ans*=10.0;
+	ans+=(double)(*qq-'0');}
+	   else 
+		{   m*=10.0;
+			ans+=(double)(*qq-'0')/m;
+	}}}
+	return ans;
+	}
+ 
+
+double opol(vector<string> polz)
+{
+	vector<string>::iterator qq;
+	stack<double> st(MAX);
+	double l,r;
+	for (qq=polz.begin(); qq<polz.end(); qq++)
+	{
+		string ww=*qq;
+		if((*ww.begin()-'0'<10) && (*ww.begin()-'0'>=0))
+			st.push(dob(ww));
+		else 
+		{ if ((*ww.begin()!='+')&&(*ww.begin()!='-')&&(*ww.begin()!='*')&&(*ww.begin()!='/'))
+		     cout<<"Vvedite znachenie peremennoy "<<ww;
+		     double a;
+			 cin>>a;
+			 st.push(a);
+		}
+		if (*ww.begin()=='+')
+		{  
+			l=st.get();
+			r=st.get();
+			l+=r;
+			st.push(l);
+		}
+
+    if (*ww.begin()=='-')
+		{  
+			l=st.get();
+			r=st.get();
+			l-=r;
+			st.push(l);
+		}
+
+	if (*ww.begin()=='*')
+		{  
+			l=st.get();
+			r=st.get();
+			l*=r;
+			st.push(l);
+		}
+
+	if (*ww.begin()=='/')
+		{  
+			l=st.get();
+			r=st.get();
+			l/=r;
+			st.push(l);
+         }
+	}
+return st.get();
+}
