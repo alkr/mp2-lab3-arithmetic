@@ -1,5 +1,4 @@
-#include <arithmetic.h>
-
+#include "arithmetic.h"
 void raz(string s,vector<string> &str)
  {
  vector<string>::iterator qq;
@@ -71,7 +70,19 @@ void pol(vector<string> str, vector<string> &polz)
 	{  
 		string ww=*qq;
 		if ((*(ww.begin())=='*')||(*(ww.begin())=='+')||(*(ww.begin())=='/')||(*(ww.begin())=='-')||(*(ww.begin())=='('))
+			{if (st.empty())
 			st.push(*ww.begin());
+			else 
+			{char t=st.get();
+			if (prior(*ww.begin(),t))
+			     { st.push(*ww.begin());
+				   string hh;
+				   hh.pb(t);
+				   polz.pb(hh);}
+				 else 
+				 {st.push(t);
+             st.push(*ww.begin());}
+			 }  }
 		else 
 		{
 			if (*(ww.begin())==')')
@@ -99,26 +110,6 @@ void pol(vector<string> str, vector<string> &polz)
 	} 
 }
 
-double dob(string tt)
-{  string::iterator qq;
-   int k=0;
-    double m=1.0;
-    double ans=(double)(*tt.begin()-'0');
-	for (qq=tt.begin()+1;qq<tt.end(); qq++)
-	{if (*qq=='.')
-	    k=1;
-	else  
-	{if (k==0)
-		{ ans*=10.0;
-	ans+=(double)(*qq-'0');}
-	   else 
-		{   m*=10.0;
-			ans+=(double)(*qq-'0')/m;
-	}}}
-	return ans;
-	}
- 
-
 double opol(vector<string> polz)
 {
 	vector<string>::iterator qq;
@@ -131,7 +122,7 @@ double opol(vector<string> polz)
 			st.push(dob(ww));
 		else 
 		{ if ((*ww.begin()!='+')&&(*ww.begin()!='-')&&(*ww.begin()!='*')&&(*ww.begin()!='/'))
-		     cout<<"Vvedite znachenie peremennoy "<<ww;
+		     cout<<"Vvedite znachenie peremennoy "<<ww<<endl;
 		     double a;
 			 cin>>a;
 			 st.push(a);
@@ -169,4 +160,34 @@ double opol(vector<string> polz)
          }
 	}
 return st.get();
-}
+} 
+
+double dob(string tt)
+{  string::iterator qq;
+   int k=0;
+    double m=1.0;
+    double ans=(double)(*tt.begin()-'0');
+	for (qq=tt.begin()+1;qq<tt.end(); qq++)
+	{if (*qq=='.')
+	    k=1;
+	else  
+	{if (k==0)
+		{ ans*=10.0;
+	ans+=(double)(*qq-'0');}
+	   else 
+		{   m*=10.0;
+			ans+=(double)(*qq-'0')/m;
+	}}}
+	return ans;
+	}
+
+bool prior(char a, char b)
+{
+	int k=0;
+	if ((a=='*' || a=='/')&& (b=='+' || b=='-')) k++;
+	if (a=='*' && b=='/') k++;
+	if (a=='+' && b=='-') k++;
+	if (a=='/' && b=='*') k++;
+	if (a=='-' && b=='+') k++;
+	return (k==0)?false:true;
+} 

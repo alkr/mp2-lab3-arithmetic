@@ -10,8 +10,8 @@
 using namespace std;
 
 void raz(string s,vector<string> &str);
-void pol(vector<string> str, vector<string> &polz);
+bool prior(char a, char b);
 double dob(string tt); 
 double opol(vector<string> polz);
-
+void pol(vector<string> str, vector<string> &polz);
 #endif

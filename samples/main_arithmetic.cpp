@@ -1,17 +1,18 @@
 #include "arithmetic.h"
 vector <string> str;
+vector <string> polz;
 vector <string>::iterator qq;
 int main()
 {
 	string::iterator pp;
-string s,www;
+string s;
 cin>>s;
 raz(s,str);
-char tt='+';
-for (qq=str.begin();qq<str.end();qq++)
- cout<<*qq<<endl; 
-cin>>s;
-cout<<dob(s)*2;
+for (qq=str.begin(); qq<str.end(); qq++)
+cout<<*qq<<" ";
+pol(str,polz);
+cout<<opol(polz);
+
 int i;
 cin>>i;
   return 0;
